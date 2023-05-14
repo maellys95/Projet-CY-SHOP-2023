@@ -10,12 +10,32 @@ typedef struct{
 }Tshirt;
 
 
+
+void EmptyBuffer(){
+    while(getchar()!='\n');
+}
+
+char* ConvChar(int a,char* b){
+    
+    sprintf(b,"%d",a);
+    //printf("Chaine=%s",b);
+   
+    
+    return b;
+    
+}
+
+
+
+
+
 void CreateAccount(int a){
     char name[20];
     char lastname[20];
     int id;
     FILE* file;
     char BuyHistory[100];
+    char tmp[6];
     
     printf("Votre nom ?\n");
     scanf("%s",name);
@@ -25,8 +45,10 @@ void CreateAccount(int a){
    
     
     
-    id= rand() %1000; //On suppose qu'on a moins de 1000 clients
-    file=fopen(("%s",name),"w");
+    id= rand() %1000;//On suppose qu'on a moins de 1000 clients
+    
+    ConvChar(id,tmp);
+    file=fopen(("%s",tmp),"w");
     
     fputs(("name = %s\n",name),file);
     fprintf(file,"\nid = %d",id);
@@ -39,23 +61,28 @@ void CreateAccount(int a){
 
 void DeleteAccount(int id){
     
-    char a[4]="oui";
-    char b[4]"non";
-    char answer[4];
+    int a;
+    
+    char tmp[5];
     FILE* file;
     
-    file=fopen(("%d",id),"w"); //ouvrir le fichier et recup le nom
-    fscanf 
+    ConvChar(id);
+    
+    file=fopen(("%s",tmp),"r"); //ouvrir le fichier et recup le nom
+    
     
     
 printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n"); 
 
-    printf("Répondez par [oui/non]");
+   do{ printf("Répondez par \n 1 pour oui\n 0 pour non");
+    scanf("%d",&a);
+    EmptyBuffer();
+   }while(a<2 || a=>0);
     
-    if(answer==b){  // il se passe r
+    if(a==0){  // il se passe r
         exit(1);
     }
-    if(answer==a){
+    if(a==1){
         
         printf("Au revoir %s ",name) //name à redéclarer dans void
         remove(file);  //supp le fichier (à tester)S
