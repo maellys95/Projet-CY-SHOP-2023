@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef struct{
     char name;
@@ -29,7 +30,7 @@ char* ConvChar(int a,char* b){
 
 
 
-void CreateAccount(int a){
+void CreateAccount(){
     char name[20];
     char lastname[20];
     int id;
@@ -43,15 +44,25 @@ void CreateAccount(int a){
     scanf("%s",lastname);
     printf("Bienvenue chez Umid Inc. %s \n",name);
    
-    
+    srand(time(NULL));
     
     id= rand() %1000;//On suppose qu'on a moins de 1000 clients
+    
+    
     
     ConvChar(id,tmp);
     file=fopen(("%s",tmp),"w");
     
     fputs(("name = %s\n",name),file);
+    fputs(("lastname = \n%s   \n",lastname),file); 
+    //ATTENTION IL COLLE LES 2 NOMS
+
     fprintf(file,"\nid = %d",id);
+    
+    
+    
+    printf("\n Voici votre ID : %d",id);
+    printf("\n Tachez de vous en souvenir !");
     
     printf("\n \n Votre inscription est finalisée\n"); // fichier client crée
 
@@ -59,34 +70,55 @@ void CreateAccount(int a){
     
 }
 
-void DeleteAccount(int id){
+void DeleteAccount(){
     
     int a;
-    
+    int id;
+    char name[20];
     char tmp[5];
     FILE* file;
     
-    ConvChar(id);
     
-    file=fopen(("%s",tmp),"r"); //ouvrir le fichier et recup le nom
+    
+    
+    
+    do{
+    printf("Entrez votre ID: ");
+    scanf("%d",&id);
+    EmptyBuffer();
+    }while (id<0 || id>1000);
+    
+    
+    ConvChar(id,tmp);
+    
+    file=fopen(("%s",tmp),"r");//ouvrir le fichier et recup le nom
+    
+    fscanf(file,"%s",tmp);
+    //fscanf("\n %s",name);
+
+    
     
     
     
 printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n"); 
 
-   do{ printf("Répondez par \n 1 pour oui\n 0 pour non");
+   do{ printf("Répondez par \n 1 pour oui\n 0 pour non\n");
     scanf("%d",&a);
     EmptyBuffer();
-   }while(a<2 || a=>0);
+   }while(a>2 || a<0);
     
     if(a==0){  // il se passe r
         exit(1);
     }
     if(a==1){
         
-        printf("Au revoir %s ",name) //name à redéclarer dans void
-        remove(file);  //supp le fichier (à tester)S
+        printf("Au revoir"); //name à redéclarer dans void
+        remove(("%s",tmp));
+        //supp le fichier CA MARCHE PAS ENCORE
+        fclose(file);
     }
+
+    
 
     
     
@@ -96,8 +128,8 @@ printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n");
 
 int main(){
     
-    CreateAccount(1);
-    
+    //CreateAccount();
+    DeleteAccount();
     
     
     return 0;
