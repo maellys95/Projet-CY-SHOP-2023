@@ -72,16 +72,17 @@ void CreateAccount(){
 
 void DeleteAccount(){
     
+    
     int a;
     int id;
     char name[20];
     char tmp[5];
+    char tmp2[5];
+    int del;
+    char filename[10];
     FILE* file;
     
-    
-    
-    
-    
+
     do{
     printf("Entrez votre ID: ");
     scanf("%d",&id);
@@ -95,9 +96,6 @@ void DeleteAccount(){
     
     fscanf(file,"%s",tmp);
     //fscanf("\n %s",name);
-
-    
-    
     
     
 printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n"); 
@@ -111,24 +109,29 @@ printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n");
         exit(1);
     }
     if(a==1){
+       
+        printf("Entrez de nouveau votre ID: ");
+        scanf("%s", filename);
+        del=remove(filename);
         
-        printf("Au revoir"); //name à redéclarer dans void
-        remove(("%s",tmp));
+        
+        if (del==0){
+        printf("Votre compte a été supprimé. \n");//name à redéclarer dans void
+        printf("Au revoir !\n");
+        }
+        else{
+            printf("Erreur, le fichier n'a pas été supprimé");
+        }
         //supp le fichier CA MARCHE PAS ENCORE
         fclose(file);
     }
 
-    
-
-    
-    
-    
 }
 
 
 int main(){
     
-    //CreateAccount();
+    CreateAccount();
     DeleteAccount();
     
     
