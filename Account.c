@@ -122,7 +122,7 @@ printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n");
         else{
             printf("Erreur, le fichier n'a pas été supprimé");
         }
-        //supp le fichier CA MARCHE PAS ENCORE
+        
         fclose(file);
     }
 
