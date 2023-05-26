@@ -14,10 +14,12 @@ typedef struct {
 } Client;
 
 typedef struct {
-    char taille[3];// TROIS TAILLE A DEFINIR 
-    float prix; // A DEFINIR (PEUT ETRE INUTILE)
-    int quantite; // TRES IMPORTANT A DEFINIR 
-} TeeShirt;
+    char *name;
+    int num; // numéro de référence
+    char size;// TROIS TAILLE A DEFINIR 
+    float price; // A DEFINIR (PEUT ETRE INUTILE)
+    int stocklevel; // TRES IMPORTANT A DEFINIR VOIR DANS GETSTOCK/BUY
+} shirt;
 
 Client clients[MAX_CLIENTS];
 int numClients = 0;
@@ -99,7 +101,7 @@ void ManagingMode() { //MOde Gestion
     }
 }
 
-int main() {
+void main() {
     int mode;
     int codeClient;
     int indexClient;
@@ -127,7 +129,7 @@ int main() {
         break;
         default:
             printf("Choix invalide\n");
-            
+            main();
             
     } 
     
