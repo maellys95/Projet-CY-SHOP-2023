@@ -20,6 +20,10 @@ struct shirt{
     float price;
     char size;
 };
+    struct shirt purple;
+    struct shirt red;
+    struct shirt blue;
+    struct shirt green;
 
 void EmptyBuffer(){
     while(getchar()!='\n');
@@ -30,7 +34,7 @@ int main() {
     int mode, b;
     int codeClient;
     int indexClient;
-    Client client;
+    FILE* file;
 
     printf("Bienvenue dans le magasin de tee-shirts !\n");
     do{
@@ -39,12 +43,21 @@ int main() {
     vide_buffer();
     } while (b!=1 && b!=2);
     if(b==1){
-    do{
+    
+        do{
     printf("Entrez votre ID: ");
     scanf("%d",&id);
     EmptyBuffer();
     }while (id =! 26 && id =! 958);
+    
+        if(id==26){
+            file=fopen("26.txt", "r");
     }
+        if(id==958){
+            file=fopen("26.txt", "r");
+        }
+    }
+    
     if(b==2){
         CreateAccount();
     }
