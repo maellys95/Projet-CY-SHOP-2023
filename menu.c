@@ -5,21 +5,24 @@
 #define FILENAME "clients.txt"
 
 
-
-int main() {
-    int mode, b;
+void ManagingMode();
+void ClientMode();
+int main(){
+    int mode;
   
     printf("Bienvenue dans le magasin de tee-shirts Cadéna\n");
     printf("Tapez:\n");
-    printf("0: Quitter");
-    printf("1: Mode Gestion");
-    printf("2: Mode Achat");
+    printf("0: Quitter\n");
+    printf("1: Mode Gestion\n");
+    printf("2: Mode Achat\n");
     scanf("%d",&mode);
+    while(getchar()!='\n'){
+    }
     
     switch (mode){ // Lancement du mode choisi
         case 0:
             printf("Au revoir !\n");
-            exit(0);
+        break;
         case 1:
             ManagingMode();
             main();//ok
