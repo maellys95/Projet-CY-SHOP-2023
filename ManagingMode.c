@@ -4,13 +4,13 @@
 #include <string.h>
 #include "menu.h"
 
-typedef struct {
-    char* name;
-    float price; 
+struct shirt{
+    char *name;
     int num;
     int stocklevel;
+    float price;
     char size;
-} shirt;
+};
 
 void EmptyBuffer(){
     while(getchar()!='\n');
