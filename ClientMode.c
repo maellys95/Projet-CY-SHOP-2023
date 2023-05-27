@@ -1,25 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <time.h>
-struct shirt{
-    char *name;
+#include <string.h>
+//#include "menu.h"
+
+typedef struct {
+    char* name;
+    float price; 
     int num;
     int stocklevel;
-    float price;
     char size;
-};
+} shirt;
 
+    
 
 void EmptyBuffer(){
-	while(getchar()!='\n');
-	}
-    
+    while(getchar()!='\n');
+}
 
 void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt green){
     char *g;
     int c, b, x, j, k, l, m, y;
     float t;
+    
     t=0;
     c=0;
     j= purple.stocklevel;
@@ -115,6 +118,7 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
     printf("Votre solde s'élève à %f €\n", t);
      do{
     printf("Voulez-vous acheter d'autres produits ? Tapez 1 si oui et 2 si non.\n"); //On s'assure que le client n' pas d'autres achats à faire
+
     scanf("%d", &b);
     EmptyBuffer();
     } while (b!=1 && b!=2);
@@ -124,7 +128,9 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
     if(b==2){
        }
        do{
-    printf("Votre solde total s'élève à %f €. Confirmez-vous votre achat ?\nTapez 1 si oui et 2 si non.\n",t); //On s'assure que le client confirme son achat
+    printf("Votre solde total s'élève à %f €. Confirmez-vous votre achat ?\nTapez 1 si oui et 2 si non.\n",t); 
+    //On s'assure que le client confirme son achat
+
     scanf("%d", &x);
     EmptyBuffer();
     } while (x!=1 && x!=2);
@@ -151,25 +157,169 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
         }
     }
 }
-    int main(){
+
+
+
+char* ConvChar(int a,char* b){
+    sprintf(b,"%d",a);
+    //printf("Chaine=%s",b);
+    return b;
+}
+
+
+
+
+
+void CreateAccount(){
+    char name[20];
+    char lastname[20];
+    int id;
+    FILE* file;
+    char BuyHistory[100];
+    char tmp[6];
+    char space[2]={' '};
+    
+    
+    
+    printf("Votre nom ?\n");
+    scanf("%s",name);
+    printf("Votre nom de Famille ?");
+    scanf("%s",lastname);
+    printf("Bienvenue chez Umid Inc. %s \n",name);
+   
+    srand(time(NULL));
+    
+    id= rand() %1000;//On suppose qu'on a moins de 1000 clients
+    
+    
+    
+    ConvChar(id,tmp);
+    file=fopen(("%s",tmp),"w");
+    
+    fputs(("name = %s\n",name),file);
+    fputs(("%s",space),file);
+    fputs(("lastname = \n%s   \n",lastname),file);
+    //ATTENTION IL COLLE LES 2 NOMS
+
+    fprintf(file,"\nid = %d",id);
+    
+    
+    
+    printf("\n Voici votre ID : %d",id);
+    printf("\n Tachez de vous en souvenir !");
+    
+    printf("\n \n Votre inscription est finalisée\n"); // fichier client crée
+
+    fclose(file);
+    
+}
+
+void DeleteAccount(){
+    
+    
+    int a;
+    int id;
+    char name[20];
+    char tmp[5];
+    char tmp2[5];
+    int del;
+    char filename[10];
+    FILE* file;
+    
+
+    do{
+    printf("Entrez votre ID: ");
+    scanf("%d",&id);
+   // EmptyBuffer();
+    }while (id<0 || id>1000);
+    printf("id: %d",id);
+    
+    ConvChar(id,tmp);
+    
+    file=fopen(("%s",tmp),"r");//ouvrir le fichier et recup le nom
+    
+    fscanf(file,"%s",tmp);
+    //fscanf("\n %s",name);
+    
+    
+printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n"); 
+
+   do{ printf("Répondez par \n 1 pour oui\n 0 pour non\n");
+    scanf("%d",&a);
+    EmptyBuffer();
+   }while(a>2 || a<0);
+    
+    if(a==0){  // il se passe r
+        exit(1);
+    }
+    if(a==1){
+       
+        printf("Entrez de nouveau votre ID: ");
+        scanf("%s", filename);
+        del=remove(filename);
+        
+        
+        if (del==0){
+        printf("Votre compte a été supprimé. \n");//name à redéclarer dans void
+        printf("Au revoir !\n");
+        }
+        else{
+            printf("Erreur, le fichier n'a pas été supprimé");
+        }
+        //supp le fichier CA MARCHE PAS ENCORE
+        fclose(file);
+    }
+
+}
+
+
+void ClientMode(){
+    
+    int choix;
+    int id;
+    int b;
+    
     struct shirt purple;
     struct shirt red;
     struct shirt blue;
     struct shirt green;
-    purple.stocklevel=9;
-    red.stocklevel=4;
-    blue.stocklevel=47;
-    green.stocklevel=3;
-    purple.name= strdup("purple");
-    red.name=strdup("red");
-    blue.name=strdup("blue");
-    green.name=strdup("green");
-    purple.price= 25.99;
-    red.price= 14.99;
-    blue.price= 16.99;
-    green.price= 65.99;
-    buy(purple, red, blue, green);
-    getStock(purple, red, blue, green);
-    return 0;
+
+    do{
+    printf("Avez-vous un compte ? Tapez 1 si oui et 2 si non.\n");
+    scanf("%d", &b);
+    EmptyBuffer();
+    } while (b!=1 && b!=2);
     
+    if(b==1){
+    do{
+    printf("Entrez votre ID: ");
+    scanf("%d",&id);
+    EmptyBuffer();
+    }while (id != 26 && id != 958);
     }
+    
+    if(b==2){
+        CreateAccount();
+    }
+    //SHOW HISTORY
+    printf("Choisissez votre action :\n");
+    printf("1. Achat\n");
+    printf("2. Supprimer mon compte\n");
+    printf("0. Quitter\n");
+    printf("Choix : ");
+    scanf("%d", &choix);
+    switch (choix) {
+        case 0:
+            printf("Au revoir !\n");
+            
+        case 1:
+            buy(purple, red, blue, green);
+            break;
+        case 2:
+            DeleteAccount();
+            break;
+        default:
+            printf("Choix invalide.\n");
+            ClientMode();
+    }
+}
