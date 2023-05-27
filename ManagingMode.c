@@ -321,6 +321,20 @@ void ManagingMode() {
     LoginManaging();
 
     printf("Gestion du magasin\n");
+    
+    if(purple.stocklevel <= 5){
+        printf("Il ne reste que %d de Purple\n", purple.stocklevel);
+    }
+    if(red.stocklevel <= 5){
+        printf("Il ne reste que %d de Red\n", red.stocklevel);
+    }
+    if(blue.stocklevel <= 5){
+        printf("Il ne reste que %d de Blue\n", blue.stocklevel);
+    }
+    if(green.stocklevel <= 5){
+        printf("Il ne reste que %d de Green\n", green.stocklevel);
+    }
+    // Affichage des produits presque en rupture de stock
     printf("1. Voir le stock\n");
     printf("2. Ajouter du stock\n");
     printf("3. Supprimer du stock\n");
