@@ -256,7 +256,7 @@ printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n");
     }
    }while(a>2 || a<0);
     
-    if(a==0){  // il se passe r
+    if(a==0){  // il se passe rien
         exit(1);
     }
     if(a==1){
@@ -267,13 +267,13 @@ printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n");
         
         
         if (del==0){
-        printf("Votre compte a été supprimé. \n");//name à redéclarer dans void
+        printf("Votre compte a été supprimé. \n");
         printf("Au revoir !\n");
         }
         else{
             printf("Erreur, le fichier n'a pas été supprimé");
         }
-        //supp le fichier CA MARCHE PAS ENCORE
+        
         fclose(file);
     }
 
@@ -304,7 +304,8 @@ void ClientMode(){
     green.price= 65.99;
 
     do{
-    printf("Avez-vous un compte ? Tapez 1 si oui et 2 si non.\n");
+    printf("Avez-vous un compte ? Tapez 1 si oui et 2 si non.\n"); 
+        //On s'assure que la personne a un compte
     scanf("%d", &b);
     while(getchar()!='\n'){
     }
@@ -322,7 +323,7 @@ void ClientMode(){
     if(b==2){
         CreateAccount();
     }
-    //SHOW HISTORY
+    //Entré du client dans l'accueil
     printf("Choisissez votre action :\n");
     printf("1. Achat\n");
     printf("2. Supprimer mon compte\n");
