@@ -12,11 +12,8 @@ struct shirt{
     char size;
 };
 
-    
 
-void EmptyBuffer(){
-    while(getchar()!='\n');
-}
+
 
 void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt green){
     char *g;
@@ -56,7 +53,8 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
     do{
     printf("Combien en voulez-vous ?\n");
     scanf("%d", &c);
-    EmptyBuffer();
+    while(getchar()!='\n'){
+    }
     } while (c<=0); // Pour chaque if, on baisse le stock en fonction de la quantité souhaitée
     
         if (strcmp(g, "purple")==0){
@@ -66,7 +64,8 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
                 printf("Stockage insuffisant !\n Il ne reste que %d de Purple\n", purple.stocklevel);
                 printf("Combien en voulez-vous ?\n");
                 scanf("%d", &c);
-                EmptyBuffer();
+                while(getchar()!='\n'){
+    }
                 purple.stocklevel = purple.stocklevel-c;
             }
         printf("Article ajouté au panier avec succès\n");
@@ -80,7 +79,8 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
                 printf("Stockage insuffisant !\n Il ne reste que %d de Red\n", red.stocklevel);
                 printf("Combien en voulez-vous ?\n");
                 scanf("%d", &c);
-                EmptyBuffer();
+                while(getchar()!='\n'){
+    }
                 red.stocklevel = red.stocklevel-c;
             }
         printf("Article ajouté au panier avec succès\n");
@@ -94,7 +94,8 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
                 printf("Stockage insuffisant !\n Il ne reste que %d de Blue\n", blue.stocklevel);
                 printf("Combien en voulez-vous ?\n");
                 scanf("%d", &c);
-                EmptyBuffer();
+                while(getchar()!='\n'){
+    }
                 blue.stocklevel = blue.stocklevel-c;
             }
         printf("Article ajouté au panier avec succès\n");
@@ -108,7 +109,8 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
                 printf("Stockage insuffisant !\n Il ne reste que %d de Green\n", green.stocklevel);
                 printf("Combien en voulez-vous ?\n");
                 scanf("%d", &c);
-                EmptyBuffer();
+                while(getchar()!='\n'){
+    }
                 green.stocklevel = green.stocklevel-c;
             }
         printf("Article ajouté au panier avec succès\n");
@@ -120,7 +122,8 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
     printf("Voulez-vous acheter d'autres produits ? Tapez 1 si oui et 2 si non.\n"); //On s'assure que le client n' pas d'autres achats à faire
 
     scanf("%d", &b);
-    EmptyBuffer();
+    while(getchar()!='\n'){
+    }
     } while (b!=1 && b!=2);
     } while(b==1);
         
@@ -132,7 +135,8 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
     //On s'assure que le client confirme son achat
 
     scanf("%d", &x);
-    EmptyBuffer();
+    while(getchar()!='\n'){
+    }
     } while (x!=1 && x!=2);
     if(x==1){
     printf("Merci d'avoir fait vos achats à la Maison du Pull *^0^*\n");
@@ -142,7 +146,8 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
         do{
         printf("Souhaitez-vous recommencer ?\nTapez 1 si oui et 2 si non.\n");
         scanf("%d", &y);
-        EmptyBuffer();
+        while(getchar()!='\n'){
+    }
     } while (y!=1 && y!=2);
             purple.stocklevel=j;//Réinisialisation de toutes les variables
             red.stocklevel=k;
@@ -160,7 +165,7 @@ void buy(struct shirt purple, struct shirt red, struct shirt blue, struct shirt 
 
 
 
-char* ConvChar(int a,char* b){
+char* ConvChar(int a,char *b){
     sprintf(b,"%d",a);
     //printf("Chaine=%s",b);
     return b;
@@ -230,7 +235,8 @@ void DeleteAccount(){
     do{
     printf("Entrez votre ID: ");
     scanf("%d",&id);
-   // EmptyBuffer();
+   while(getchar()!='\n'){
+    }
     }while (id<0 || id>1000);
     printf("id: %d",id);
     
@@ -246,7 +252,8 @@ printf("Voulez-vous vraiment vous désincrire et supprimer votre compte ?\n");
 
    do{ printf("Répondez par \n 1 pour oui\n 0 pour non\n");
     scanf("%d",&a);
-    EmptyBuffer();
+    while(getchar()!='\n'){
+    }
    }while(a>2 || a<0);
     
     if(a==0){  // il se passe r
@@ -283,18 +290,32 @@ void ClientMode(){
     struct shirt red;
     struct shirt blue;
     struct shirt green;
+    purple.stocklevel=9;
+    red.stocklevel=4;
+    blue.stocklevel=47;
+    green.stocklevel=3;
+    purple.name= strdup("purple");
+    red.name=strdup("red");
+    blue.name=strdup("blue");
+    green.name=strdup("green");
+    purple.price= 25.99;
+    red.price= 14.99;
+    blue.price= 16.99;
+    green.price= 65.99;
 
     do{
     printf("Avez-vous un compte ? Tapez 1 si oui et 2 si non.\n");
     scanf("%d", &b);
-    EmptyBuffer();
+    while(getchar()!='\n'){
+    }
     } while (b!=1 && b!=2);
     
     if(b==1){
     do{
     printf("Entrez votre ID: ");
     scanf("%d",&id);
-    EmptyBuffer();
+    while(getchar()!='\n'){
+    }
     }while (id != 26 && id != 958);
     }
     
@@ -308,10 +329,12 @@ void ClientMode(){
     printf("0. Quitter\n");
     printf("Choix : ");
     scanf("%d", &choix);
+    while(getchar()!='\n'){
+    }
     switch (choix) {
         case 0:
             printf("Au revoir !\n");
-            
+            break;
         case 1:
             buy(purple, red, blue, green);
             break;

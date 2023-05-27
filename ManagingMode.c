@@ -42,25 +42,10 @@ void LoginManaging(){
 }
 
 
-void getStock(){
+void getStock(struct shirt purple, struct shirt red, struct shirt blue, struct shirt green){
     int a, p, n;
     char *b;
-    struct shirt purple;
-    struct shirt red;
-    struct shirt blue;
-    struct shirt green;
-    purple.stocklevel=9;
-    red.stocklevel=4;
-    blue.stocklevel=47;
-    green.stocklevel=3;
-    purple.name= strdup("purple");
-    red.name=strdup("red");
-    blue.name=strdup("blue");
-    green.name=strdup("green");
-    purple.price= 25.99;
-    red.price= 14.99;
-    blue.price= 16.99;
-    green.price= 65.99;
+    
 
     do{
     do{
@@ -130,8 +115,8 @@ printf("Le niveau du stock du produit %s est %d pièces restantes.\n", green.nam
 printf("Retour au Menu Principal\n"); //On affiche tous les stocks et retour au menu principal
 }
 
-void addstock(){
-   
+void addstock(struct shirt purple, struct shirt red, struct shirt blue, struct shirt green){
+    struct shirt b;
     int c, a, q;
     a= 200; //La capacité du magasin est limité à 80
     do{
@@ -221,25 +206,8 @@ printf("Retour au Menu Principal\n"); //On affiche tous les stocks et retour au 
 }
 
 
-void SubstractStock(){
+void SubstractStock(struct shirt purple, struct shirt red, struct shirt blue, struct shirt green){
     struct shirt b;
-    struct shirt purple;
-    struct shirt red;
-    struct shirt blue;
-    struct shirt green;
-    purple.stocklevel=9;
-    red.stocklevel=4;
-    blue.stocklevel=47;
-    green.stocklevel=3;
-    purple.name= strdup("purple");
-    red.name=strdup("red");
-    blue.name=strdup("blue");
-    green.name=strdup("green");
-    purple.price= 25.99;
-    red.price= 14.99;
-    blue.price= 16.99;
-    green.price= 65.99;
-    
     int c, a, q;
     a= 200; //La capacité du magasin est limité à 200
     do{
@@ -315,7 +283,7 @@ void SubstractStock(){
 do{
 printf("Souhaitez-vous baisser le stock d'un autre produit ? Tapez 1 si oui et 2 si non.\n");
 scanf("%d", &q); 
-EmptyBuffer();
+
 }while (q!=1 && q!=2);
 }while(q==1); //On s'assure que la personne n'a pas un autre stock à baisser
 if(q==2){
@@ -359,21 +327,26 @@ void ManagingMode() {
     printf("0. Quitter\n");
     printf("Choix : ");
     scanf("%d", &choix);
+    while(getchar()!='\n'){
+    }
 
     switch (choix) {
         case 0:
             printf("Au revoir !\n");
+            break;
         case 1:
-            getStock(struct shirt purple, struct shirt red, struct shirt blue, struct shirt green);// fonction afficher le stock
+            getStock(purple, red, blue, green);// fonction afficher le stock
             break;
         case 2:
-            addstock(struct shirt purple, struct shirt red, struct shirt blue, struct shirt green);//fonction ajouter du stock
+            addstock(purple, red, blue, green);//fonction ajouter du stock
             break;
         case 3:
-           SubstractStock(struct shirt purple, struct shirt red, struct shirt blue, struct shirt green); // fonction supprimer du stock
+           SubstractStock(purple, red, blue, green); // fonction supprimer du stock
             break;
         default:
             printf("Choix invalide.\n");
+            ManagingMode();
+            break;
     }
     
 }
