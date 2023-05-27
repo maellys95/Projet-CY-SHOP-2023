@@ -19,7 +19,7 @@ void EmptyBuffer(){
 void LoginManaging(){
     char password[5];
     int b;
-    
+    //Mot de passe obligatoire pour y accéder
     printf("\nMODE GESTION IDENTIFICATION \n");
     printf("Entrez le code d'accès: ");
     scanf("%d",&b);
@@ -59,7 +59,7 @@ void getStock(struct shirt purple, struct shirt red, struct shirt blue, struct s
         printf("Ecrivez le nom du produit\n");
         scanf("%s", b);
         getchar();
-        }while(strcmp(b, "purple")!=0 && (strcmp(b, "red")!=0) && (strcmp(b, "blue")!=0) && (strcmp(b, "green")!=0)); //On récupère les noms 
+        }while(strcmp(b, "purple")!=0 && (strcmp(b, "red")!=0) && (strcmp(b, "blue")!=0) && (strcmp(b, "green")!=0));  
      //On récupère les noms des produits et on affiche le stock correspondant
         
         if (strcmp(b, "purple")==0){
@@ -118,7 +118,7 @@ printf("Retour au Menu Principal\n"); //On affiche tous les stocks et retour au 
 void addstock(struct shirt purple, struct shirt red, struct shirt blue, struct shirt green){
     struct shirt b;
     int c, a, q;
-    a= 200; //La capacité du magasin est limité à 80
+    a= 200; //La capacité du magasin est limité à 200
     do{
     do{
         printf("Ecrivez la référence du produit\n");
@@ -130,7 +130,7 @@ void addstock(struct shirt purple, struct shirt red, struct shirt blue, struct s
         printf("De combien l'augmentez-vous ?\n");
         scanf("%d", &c);
         EmptyBuffer();
-     }while(c<=0); //On demande les informations générales du produit telles que la référence et combien on ajouté=e
+     }while(c<=0); //On demande les informations générales du produit telles que la référence et combien on ajoute
     switch (b.num){
         case 001:
             while(c+purple.stocklevel+red.stocklevel+blue.stocklevel+green.stocklevel > a){
@@ -221,7 +221,7 @@ void SubstractStock(struct shirt purple, struct shirt red, struct shirt blue, st
         printf("De combien le baissez-vous ?\n");
         scanf("%d", &c);
         EmptyBuffer();
-     }while(c<=0); //On demande les informations générales du produit telles que la référence et combien on ajouté=e
+     }while(c<=0); //On demande les informations générales du produit telles que la référence et combien on ajoute
     switch (b.num){
         case 001:
             while(purple.stocklevel-c<0){
@@ -232,8 +232,8 @@ void SubstractStock(struct shirt purple, struct shirt red, struct shirt blue, st
                 EmptyBuffer();
                 }while(c<=0);
     }
-        purple.stocklevel=purple.stocklevel-c; // On augmente le stock
-        a=purple.stocklevel+red.stocklevel+blue.stocklevel+green.stocklevel; // On augmente le stock total du magasin
+        purple.stocklevel=purple.stocklevel-c; // On baisse le stock
+        a=purple.stocklevel+red.stocklevel+blue.stocklevel+green.stocklevel; // On baisse le stock total du magasin
         printf("Le niveau du stock du produit %s est %d pièces restantes.\n", purple.name, purple.stocklevel);
         break;
         
